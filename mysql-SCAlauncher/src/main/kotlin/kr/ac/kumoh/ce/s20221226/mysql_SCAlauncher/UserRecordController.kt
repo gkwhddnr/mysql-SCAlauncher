@@ -23,5 +23,7 @@ class UserRecordController(@Autowired val service: RecordService) {
     fun getTopAndUserRecords(
         @RequestParam mapName: String,
         @RequestParam userId: Long
-    ): List<Record> = service.getTopAndUserRecords(mapName, userId)
+    ): List<RecordDTO> {
+        return service.getTopAndUserRecords(mapName, userId)
+    }
 }

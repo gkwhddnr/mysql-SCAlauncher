@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/chats")
-class ChatController(@Autowired val chatRepo: ChatRepository) {
+class ChatController(@Autowired val service: ChatService) {
 
     @GetMapping
-    fun getAllChats(): List<ChatLog> = chatRepo.findAll()
+    fun getAllChats(): List<ChatDTO> = service.getAllChats()
 }

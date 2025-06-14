@@ -4,10 +4,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class GameRoomService (val repo: GameRoomRepository, val userRepo: UserRepository, val mapRepo: MapRepository) {
-    fun create(userId: Long, mapId: Long, isPrivate: Boolean): GameRoom {
-        val user = userRepo.findById(userId).orElseThrow()
-        val map = mapRepo.findById(mapId).orElseThrow()
-        return repo.save(GameRoom(host = user, map = map, isPrivate = isPrivate))
+    fun getAllRooms(): List<GameRoomDTO> {
+        return repo.findAll().map { room ->
+            GameRoomDTO(
+                roomId = room.roomId,
+                hostUserId = room.host.userId,
+                hostUsername = room.host.username,
+                mapName = room.map.mapName,
+                isPrivate = room.isPrivate,
+                createdAt = room.createdAt
+            )
+        }
     }
-    fun getAll() = repo.findAll()
 }

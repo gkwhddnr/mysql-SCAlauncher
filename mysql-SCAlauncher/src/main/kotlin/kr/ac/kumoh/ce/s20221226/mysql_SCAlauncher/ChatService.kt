@@ -4,5 +4,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class ChatService(val repo: ChatRepository) {
-    fun getByRoom(roomId: Long): List<ChatLog> = repo.findAll().filter { it.room.roomId == roomId }
+    fun getAllChats(): List<ChatDTO> {
+        return repo.findAll().map { chat ->
+            ChatDTO(
+                chatId = chat.chatId,
+                userId = chat.user.userId,
+                username = chat.user.username,
+                roomId = chat.room.roomId,
+                message = chat.message,
+                sentAt = chat.sentAt
+            )
+        }
+    }
 }

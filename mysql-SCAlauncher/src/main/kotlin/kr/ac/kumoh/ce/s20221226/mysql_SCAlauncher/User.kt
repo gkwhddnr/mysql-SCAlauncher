@@ -1,3 +1,4 @@
+
 package kr.ac.kumoh.ce.s20221226.mysql_SCAlauncher
 
 import jakarta.persistence.Entity
